@@ -33,6 +33,7 @@ void main() {
     directory: 'images',
     // Optional: Configure which properties in your frontmatter contain asset paths.
     dataProperties: {'image', 'meta.thumbnail'},
+    outputPrefix: 'europe_travelogue/assets',
   );
 
   // 2. Add middleware to serve assets during development.
