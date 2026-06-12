@@ -30,7 +30,7 @@ void main() {
   // 1. Initialize and configure AssetManager.
   final assetManager = AssetManager(
     // The root directory where your assets are located. Usually, this is the same as your content directory.
-    directory: 'content',
+    directory: 'images',
     // Optional: Configure which properties in your frontmatter contain asset paths.
     dataProperties: {'image', 'meta.thumbnail'},
   );
@@ -44,6 +44,7 @@ void main() {
   // your markdown files in the content/ directory to a beautiful documentation site.
   runApp(
     Document(
+      base: "europe_travelogue",
       /* ... */
       // other properties
       head: [
