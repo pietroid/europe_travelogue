@@ -5,15 +5,14 @@
 library;
 
 // Server-specific Jaspr import.
+import 'package:jaspr/dom.dart';
 import 'package:jaspr/server.dart';
 
 import 'package:jaspr_content/components/callout.dart';
 import 'package:jaspr_content/components/code_block.dart';
-import 'package:jaspr_content/components/github_button.dart';
 import 'package:jaspr_content/components/header.dart';
 import 'package:jaspr_content/components/image.dart';
 import 'package:jaspr_content/components/sidebar.dart';
-import 'package:jaspr_content/components/theme_toggle.dart';
 import 'package:jaspr_content/jaspr_content.dart';
 import 'package:jaspr_content/theme.dart';
 
@@ -28,74 +27,117 @@ void main() {
     options: defaultServerOptions,
   );
 
+  // 1. Initialize and configure AssetManager.
+  final assetManager = AssetManager(
+    // The root directory where your assets are located. Usually, this is the same as your content directory.
+    directory: 'content',
+    // Optional: Configure which properties in your frontmatter contain asset paths.
+    dataProperties: {'image', 'meta.thumbnail'},
+  );
+
+  // 2. Add middleware to serve assets during development.
+  ServerApp.addMiddleware(assetManager.middleware);
+
   // Starts the app.
   //
   // [ContentApp] spins up the content rendering pipeline from jaspr_content to render
   // your markdown files in the content/ directory to a beautiful documentation site.
   runApp(
-    ContentApp(
-      // Enables mustache templating inside the markdown files.
-      templateEngine: MustacheTemplateEngine(),
-      parsers: [
-        MarkdownParser(),
-      ],
-      extensions: [
-        // Adds heading anchors to each heading.
-        HeadingAnchorsExtension(),
-        // Generates a table of contents for each page.
-        TableOfContentsExtension(),
-      ],
-      components: [
-        // The <Info> block and other callouts.
-        Callout(),
-        // Adds syntax highlighting to code blocks.
-        CodeBlock(),
-        // Adds a custom Jaspr component to be used as <Clicker/> in markdown.
-        CustomComponent(
-          pattern: 'Clicker',
-          builder: (_, _, _) => Clicker(),
+    Document(
+      /* ... */
+      // other properties
+      head: [
+        link(
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com',
         ),
-        // Adds zooming and caption support to images.
-        Image(zoom: true),
-      ],
-      layouts: [
-        // Out-of-the-box layout for documentation sites.
-        DocsLayout(
-          header: Header(
-            title: 'My Docs',
-            logo: '/images/logo.svg',
-            items: [
-              // Enables switching between light and dark mode.
-              ThemeToggle(),
-              // Shows github stats.
-              GitHubButton(repo: 'schultek/jaspr'),
-            ],
-          ),
-          sidebar: Sidebar(
-            groups: [
-              // Adds navigation links to the sidebar.
-              SidebarGroup(
-                links: [
-                  SidebarLink(text: "Overview", href: '/'),
-                ],
-              ),
-              SidebarGroup(
-                title: 'Content',
-                links: [
-                  SidebarLink(text: "About", href: '/about'),
-                ],
-              ),
-            ],
-          ),
+        link(
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          attributes: {'crossorigin': ''},
+        ),
+        link(
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Gilda+Display&display=swap',
         ),
       ],
-      theme: ContentTheme(
-        // Customizes the default theme colors.
-        primary: ThemeColor(ThemeColors.blue.$500, dark: ThemeColors.blue.$300),
-        background: ThemeColor(ThemeColors.slate.$50, dark: ThemeColors.zinc.$950),
-        colors: [
-          ContentColors.quoteBorders.apply(ThemeColors.blue.$400),
+      body: ContentApp(
+        // Enables mustache templating inside the markdown files.
+        templateEngine: MustacheTemplateEngine(),
+        parsers: [
+          MarkdownParser(),
         ],
+        extensions: [
+          // Adds heading anchors to each heading.
+          HeadingAnchorsExtension(),
+          // Generates a table of contents for each page.
+          //TableOfContentsExtension(),
+          assetManager.pageExtension,
+        ],
+        components: [
+          // The <Info> block and other callouts.
+          Callout(),
+          // Adds syntax highlighting to code blocks.
+          CodeBlock(),
+          // Adds a custom Jaspr component to be used as <Clicker/> in markdown.
+          CustomComponent(
+            pattern: 'Clicker',
+            builder: (_, _, _) => Clicker(),
+          ),
+          // Adds zooming and caption support to images.
+          Image(zoom: true),
+        ],
+        layouts: [
+          // Out-of-the-box layout for documentation sites.
+          DocsLayout(
+            header: Header(
+              title: 'Europa: Jornada do coração',
+              logo: '/images/logo.svg',
+              items: [],
+            ),
+            sidebar: Sidebar(
+              groups: [
+                // Adds navigation links to the sidebar.
+                SidebarGroup(
+                  links: [
+                    SidebarLink(text: "Overview", href: '/'),
+                  ],
+                ),
+                SidebarGroup(
+                  title: 'Content',
+                  links: [
+                    SidebarLink(text: "About", href: '/about'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+        theme: ContentTheme(
+          font: FontFamily('Gilda Display'),
+          background: ThemeColor(Color("#F0D3D7")),
+          colors: [
+            ContentColors.text.apply(Color("#3B0D13")),
+            ContentColors.headings.apply(Color("#6D0002")),
+            ContentColors.links.apply(Color("#C8003F")),
+            ContentColors.quoteBorders.apply(Color("#C8003F")),
+            ContentColors.quotes.apply(Color("#C8003F")),
+            ContentColors.captions.apply(Color("#6D0002")),
+          ],
+          typography: ContentTypography.base.apply(
+            styles: Styles(
+              lineHeight: Unit.em(1.5),
+              textAlign: TextAlign.justify,
+              margin: Margin.fromLTRB(
+                Unit.em(0),
+                Unit.em(1),
+                Unit.em(1),
+                Unit.em(1),
+              ),
+            ),
+            rules: [],
+          ),
+        ),
       ),
     ),
   );
