@@ -87,17 +87,17 @@ void main() {
             sidebar: Sidebar(
               groups: [
                 // Adds navigation links to the sidebar.
-                SidebarGroup(
-                  links: [
-                    SidebarLink(text: "Overview", href: '/'),
-                  ],
-                ),
-                SidebarGroup(
-                  title: 'Content',
-                  links: [
-                    SidebarLink(text: "About", href: '/about'),
-                  ],
-                ),
+                // SidebarGroup(
+                //   links: [
+                //     SidebarLink(text: "Overview", href: '/'),
+                //   ],
+                // ),
+                // SidebarGroup(
+                //   title: 'Content',
+                //   links: [
+                //     SidebarLink(text: "About", href: '/about'),
+                //   ],
+                // ),
               ],
             ),
           ),
