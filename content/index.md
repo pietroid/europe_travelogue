@@ -13,7 +13,7 @@ E acho que isso resume tudo. Todas as viagens, são, no final, viagens do coraç
 Seja literalmente no **Sagrado Coração de Paris**, ou na **Gruta de Maria Madalena**, na **Peregrinação de Santa Sara Kali** ou ainda uma simples descoberta de um **Jardim de rosas no parque do retiro de Madrid**.
 
 <Image
-  src="rosas.png"
+  src="images/rosas.png"
   alt="Rosas"
   caption="Jardim de Rosas em Madrid"
 />
@@ -25,7 +25,7 @@ O coração é o que está no centro de tudo: é o significado do todo.
 Poderíamos resumir nossa viagem em um evento: A peregrinação de Ciganos do mundo inteiro para consagrar Santa Sara Kali, no dia 25 de maio, numa cidadezinha do sul da França. 
 
 <Image
-  src="sara_kali.png"
+  src="images/sara_kali.png"
   alt="Sara Kali"
   caption="Santa Sara Kali, a Santa Negra dos Ciganos. Esta é a imagem presente em Saintes-Maries-de-La-Mer, sul da França."
 />

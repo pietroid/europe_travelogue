@@ -27,18 +27,6 @@ void main() {
     options: defaultServerOptions,
   );
 
-  // 1. Initialize and configure AssetManager.
-  final assetManager = AssetManager(
-    // The root directory where your assets are located. Usually, this is the same as your content directory.
-    directory: 'images',
-    // Optional: Configure which properties in your frontmatter contain asset paths.
-    dataProperties: {'image', 'meta.thumbnail'},
-    outputPrefix: 'assets',
-  );
-
-  // 2. Add middleware to serve assets during development.
-  ServerApp.addMiddleware(assetManager.middleware);
-
   // Starts the app.
   //
   // [ContentApp] spins up the content rendering pipeline from jaspr_content to render
@@ -74,7 +62,6 @@ void main() {
           HeadingAnchorsExtension(),
           // Generates a table of contents for each page.
           //TableOfContentsExtension(),
-          assetManager.pageExtension,
         ],
         components: [
           // The <Info> block and other callouts.
@@ -94,7 +81,7 @@ void main() {
           DocsLayout(
             header: Header(
               title: 'Europa: Jornada do coração',
-              logo: '/images/logo.svg',
+              logo: 'images/logo.svg',
               items: [],
             ),
             sidebar: Sidebar(

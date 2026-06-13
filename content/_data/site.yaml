@@ -1,6 +1,8 @@
 # Site Configuration
 titleBase: DOCS
 favicon: favicon.ico
+# Served from a GitHub Pages project subpath, so all relative URLs resolve here.
+base: /europe_travelogue/
 
 # Social media links
 social:
