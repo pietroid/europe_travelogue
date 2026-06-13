@@ -44,7 +44,7 @@ void main() {
   // your markdown files in the content/ directory to a beautiful documentation site.
   runApp(
     Document(
-      //base: "europe_travelogue",
+      base: "europe_travelogue",
       /* ... */
       // other properties
       head: [
