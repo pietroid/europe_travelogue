@@ -50,6 +50,37 @@ void main() {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Gilda+Display&display=swap',
         ),
+        meta(
+          name: 'description',
+          content: 'O nosso carinhoso relato sobre a nossa viagem na França e na Espanha',
+        ),
+        meta(
+          name: 'keywords',
+          content: 'travel, europe, blog, photography',
+        ),
+        // Open Graph
+        meta(
+          attributes: {
+            'property': 'og:title',
+            'content': 'Europa: Jornada do Coração',
+          },
+        ),
+        meta(
+          attributes: {
+            'property': 'og:description',
+            'content': 'O nosso carinhoso relato sobre a nossa viagem na França e na Espanha',
+          },
+        ),
+        meta(
+          attributes: {
+            'property': 'og:image',
+            'content': 'https://pietroid.github.io/europe_travelogue/images/logo.svg',
+          },
+        ),
+        link(
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com',
+        ),
       ],
       body: ContentApp(
         // Enables mustache templating inside the markdown files.
