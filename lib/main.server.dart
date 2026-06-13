@@ -33,7 +33,6 @@ void main() {
     directory: 'images',
     // Optional: Configure which properties in your frontmatter contain asset paths.
     dataProperties: {'image', 'meta.thumbnail'},
-    outputPrefix: 'europe_travelogue/assets',
   );
 
   // 2. Add middleware to serve assets during development.
@@ -45,7 +44,7 @@ void main() {
   // your markdown files in the content/ directory to a beautiful documentation site.
   runApp(
     Document(
-      base: "europe_travelogue",
+      //base: "europe_travelogue",
       /* ... */
       // other properties
       head: [
